@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Poppins:wght@300;400;500;600&display=swap');
+        body {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-family: 'Noto Serif', serif;
+            background-color: #f9f9f9;
+            line-height: 1.6;
+            color: #333;
+        }
+    
+        p, h1, h2, h3, a, ul {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            color: #222;
+        }
+    
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        nav ul {
+            display: flex;
+            align-items: center;
+        }
+    
+        nav li {
+            list-style-type: none;
+            margin-left: 20px;
+        }
+    
+        nav h1 {
+            font-size: 2.5em;
+            color: #fff;
+            font-weight: 600;
+        }
+    
+        nav p, nav a {
+            color: #fff;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+    
+        nav a:hover {
+            color: #ffeb3b;
+        }
+    
+        /* Main Content */
+        .content {
+            margin-left: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        h2 {
+            margin-bottom: 40px;
+            font-size: 2em;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    
+        h3 {
+            text-transform: capitalize;
+            margin-bottom: 8px;
+            font-size: 1.5em;
+            color: #ff7e5f;
+        }
+    
+        .blogs {
+            margin-top: 20px;
+        }
+    
+        .blogs .title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    
+        .blogs .snippet {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.6;
+        }
+    
+        /* Create Blog Form */
+        .create-blog form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        .create-blog input,
+        .create-blog textarea {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            font-family: 'Noto Serif', serif;
+        }
+    
+        .create-blog textarea {
+            height: 150px;
+            resize: vertical;
+        }
+    
+        .create-blog label {
+            display: block;
+            margin-top: 24px;
+            font-size: 1.1em;
+            color: #333;
+        }
+    
+        .create-blog button {
+            margin-top: 20px;
+            background: #ff7e5f;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+    
+        .create-blog button:hover {
+            background: #feb47b;
+        }
+    
+        /* Footer */
+        footer {
+            color: #777;
+            text-align: center;
+            margin: 80px auto 20px;
+            padding: 20px 0;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9em;
+        }
+    
+        footer a {
+            color: #ff7e5f;
+            transition: color 0.3s ease;
+        }
+    
+        footer a:hover {
+            color: #feb47b;
+        }
