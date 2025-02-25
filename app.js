@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Blog = require('./models/blog');
+const { result } = require('lodash');
 
 // express app 
 const app = express();
@@ -22,12 +23,16 @@ app.set('view engine', 'ejs');
 
 // middleware & static files
 app.use(express.static('public'));
+
+// use(express. urlencoded({extended: true})) is added to the server code, it registers the middleware to handle URL-encoded data for all incoming requests.
+app.use(express.urlencoded({extended: true}));
+
 app.use(morgan('dev'));
 
 // routes
 app.get('/add-blog', (req, res) => {
     const blog = new Blog({
-        title: 'new blog 2',
+        title: 'new blog 3',
         snippet: 'about my new blog',
         body: 'more about my new blog'
     });
@@ -52,7 +57,7 @@ app.get('/all-blogs', (req, res) => {
 })
 
 app.get('/single-blog', (req, res) => {
-    Blog.findById('67aeebbb9a6d0ec25a993859')
+    Blog.findById('67bc3bb1c4a666c12031dcf1')
     .then((result) => {
         res.send(result);
     })
@@ -85,6 +90,44 @@ app.get('/blogs', (req, res) => {
     })
     .catch((err) => {
         console.log(err)
+    })
+});
+
+app.post('/blogs', (req, res) => {
+    const blog = new Blog(req.body);
+
+    blog.save()
+    .then((result) => {
+        res.redirect('/blogs');
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+});
+
+app.get('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+
+    Blog.findById(id)
+    .then(result => {
+        res.render('details', { blog: result, title: 'Blog details'})
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+});
+
+
+app.delete('/blogs/:id', (req, res) => {
+    const id = req.params.id;
+
+    Blog.findByIdAndDelete(id)
+    .then(result => {
+        res.json({redirect: '/blogs'});
+    })
+    .catch(err => {
+        console.log(err);
     })
 });
 
