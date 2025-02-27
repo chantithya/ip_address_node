@@ -1,7 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const Blog = require('./models/blog');
+const blogRoutes = require('./routes/blogRoutes');
+
+
 const { result } = require('lodash');
 
 // express app 
@@ -9,7 +11,7 @@ const app = express();
 
 // connect to mongodb 
 const dbURI = "mongodb+srv://dbUser123:dbUser123@nodetuts.aylur.mongodb.net/Node-tuts?retryWrites=true&w=majority&appName=Nodetuts";
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI)
     .then(() => {
         console.log('Connected to MongoDB');
         app.listen(3000, () => {
@@ -30,9 +32,12 @@ app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
 // routes
+app.use('/blogs', blogRoutes)
+
+
 app.get('/add-blog', (req, res) => {
     const blog = new Blog({
-        title: 'new blog 3',
+        title: 'new blog',
         snippet: 'about my new blog',
         body: 'more about my new blog'
     });
@@ -66,69 +71,9 @@ app.get('/single-blog', (req, res) => {
     })
 });
 
-
 // routes
 app.get('/', (req, res) => {
-    // const blogs = [
-    //     { title: 'chantithya', snippet: 'Lorem ipsum dolar sit amet consectetur' },
-    //     { title: 'Mario finds stars', snippet: 'Lorem ipsum dolar sit amet consectetur' },
-    //     { title: 'How to defind browser', snippet: 'Lorem ipsum dolar sit amet consectetur' },
-    // ];
-    // const title = 'Home';
-    // const name = 'Chantithya';
-    // res.render('index', { title, blogs, name });
-
     res.redirect('/blogs');
-});
-
-
-// blog route       
-app.get('/blogs', (req, res) => {
-    Blog.find()
-    .then((result) => {
-        res.render('index', {title: 'All Blogs', blogs: result})
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-});
-
-app.post('/blogs', (req, res) => {
-    const blog = new Blog(req.body);
-
-    blog.save()
-    .then((result) => {
-        res.redirect('/blogs');
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-});
-
-app.get('/blogs/:id', (req, res) => {
-    const id = req.params.id;
-
-    Blog.findById(id)
-    .then(result => {
-        res.render('details', { blog: result, title: 'Blog details'})
-    })
-    .catch(err => {
-        console.log(err);
-    })
-
-});
-
-
-app.delete('/blogs/:id', (req, res) => {
-    const id = req.params.id;
-
-    Blog.findByIdAndDelete(id)
-    .then(result => {
-        res.json({redirect: '/blogs'});
-    })
-    .catch(err => {
-        console.log(err);
-    })
 });
 
 app.get('/about', (req, res) => {
@@ -139,12 +84,6 @@ app.get('/about', (req, res) => {
 
 app.get('/about-us', (req, res) => {
     res.redirect('/about');
-});
-
-app.get('/blogs/create', (req, res) => {
-    const title = 'Create Blog';
-    const name = 'Chantithya';
-    res.render('create', { title, name });
 });
 
 // 404 page 
